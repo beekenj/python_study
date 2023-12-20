@@ -1,0 +1,21 @@
+<html>
+	<script type="text/javascript">
+		nums = [2,7,11,15]
+		target = 9
+		// console.log(nums.length);
+		var twoSum = function(nums, target) {
+		    hash_map = {}
+		    for (i=0; i<nums.length; i++) {
+		    	if (nums[i] in hash_map) {
+		    		return [hash_map[nums[i]], i]
+		    	}
+		    	else {
+		    		hash_map[target-nums[i]] = i
+		    	}
+		    }
+		};
+		console.log(twoSum(nums, target));
+		// obj = {1:1}
+		// console.log(1 in obj)
+	</script>
+</html>
