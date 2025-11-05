@@ -8,3 +8,17 @@ FROM (
     GROUP BY actor_id, director_id
 ) AS pairs
 WHERE pairs.cnt >= 3;
+
+
+
+1407. Top Travellers
+
+# Write your MySQL query statement below
+SELECT u.name, IFNULL(SUM(distance), 0) as travelled_distance
+FROM Users u
+LEFT JOIN Rides r ON u.id = r.user_id
+GROUP BY u.id
+ORDER BY travelled_distance DESC, name ASC;
+
+
+
