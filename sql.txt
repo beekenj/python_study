@@ -1,5 +1,4 @@
 1050. Actors and Directors Who Cooperated At Least Three Times
-
 # Write your MySQL query statement below
 SELECT actor_id, director_id
 FROM (
@@ -10,9 +9,7 @@ FROM (
 WHERE pairs.cnt >= 3;
 
 
-
 1407. Top Travellers
-
 # Write your MySQL query statement below
 SELECT u.name, IFNULL(SUM(distance), 0) as travelled_distance
 FROM Users u
@@ -21,9 +18,7 @@ GROUP BY u.id
 ORDER BY travelled_distance DESC, name ASC;
 
 
-
 1280. Students and Examinations
-
 # Write your MySQL query statement below
 SELECT s.student_id, s.student_name, s.subject_name, IFNULL(e.cnt, 0) AS attended_exams
 FROM (
@@ -42,10 +37,20 @@ ON s.student_id = e.student_id AND s.subject_name = e.subject_name
 ORDER BY s.student_id, s.subject_name
 
 
-
 1683. Invalid Tweets
-
 # Write your MySQL query statement below
 SELECT tweet_id
 FROM Tweets
 WHERE LENGTH(content) > 15
+
+
+1587. Bank Account Summary II
+# Write your MySQL query statement below
+SELECT u.name, SUM(t.amount) AS balance
+FROM Users u
+LEFT JOIN Transactions t
+ON u.account = t.account
+GROUP BY u.account
+HAVING balance > 10000;
+
+
