@@ -90,3 +90,17 @@ ORDER BY user_id
 select event_day as day, emp_id, sum(out_time - in_time) as total_time
 from Employees
 group by event_day, emp_id
+
+
+1965. Employees With Missing Information
+# Write your MySQL query statement below
+select *
+from Employees e
+left join Salaries s on e.employee_id = s.employee_id
+union
+select *
+from Employees e
+right join Salaries s on e.employee_id = s.employee_id
+where e.employee_id is null
+
+
