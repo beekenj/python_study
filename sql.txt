@@ -104,3 +104,7 @@ right join Salaries s on e.employee_id = s.employee_id
 where e.employee_id is null
 
 
+610. Triangle Judgement
+# Write your MySQL query statement below
+select *, if(x + y > z and x + z > y and y + z > x, 'Yes', 'No') as triangle
+from Triangle
