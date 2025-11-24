@@ -108,3 +108,11 @@ where e.employee_id is null
 # Write your MySQL query statement below
 select *, if(x + y > z and x + z > y and y + z > x, 'Yes', 'No') as triangle
 from Triangle
+
+
+178. Rank Scores
+# Write your MySQL query statement below
+select
+    score,
+    dense_rank() over (order by score desc) as `rank`
+from Scores
