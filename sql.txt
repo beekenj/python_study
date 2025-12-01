@@ -192,3 +192,19 @@ select
     if(employee_id % 2 != 0 and left(name, 1) != 'M', salary, 0) as bonus
 from Employees
 order by employee_id
+
+
+184. Department Highest Salary
+# Write your MySQL query statement below
+select 
+    d.name as Department, 
+    e.name as Employee,
+    salary as Salary
+from Employee e
+left join Department d on e.departmentId = d.id
+left join (
+    select departmentId, max(salary) as mx
+    from Employee
+    group by departmentId
+) s on e.departmentId = s.departmentId
+where e.salary = s.mx
