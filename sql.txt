@@ -287,3 +287,45 @@ from Weather w1
 left join Weather w2
 on w1.recordDate - interval 1 day = w2.recordDate
 where w1.temperature > w2.temperature
+
+
+1164. Product Price at a Given Date
+# Write your MySQL query statement below
+select p.product_id, p.new_price as price
+from (
+    select *
+    from (
+        select p.product_id, p.new_price, change_date
+        from (
+            select *
+            from Products
+            where change_date <= '2019-08-16'
+            union
+            select p.product_id, 10 as new_price, c.change_date
+            from Products p, (
+                select subdate(min(change_date), interval 1 day) as change_date
+                from Products
+            ) c
+        ) p
+    ) p
+    left join (
+        select p1.product_id as pid, max(p1.change_date) as cd
+        from (
+            select p.product_id, p.new_price, max(p.change_date) as change_date
+            from (
+                select *
+                from Products
+                where change_date <= '2019-08-16'
+                union
+                select p.product_id, 10 as new_price, c.change_date
+                from Products p, (
+                    select subdate(min(change_date), interval 1 day) as change_date
+                    from Products
+                ) c
+            ) p
+            group by product_id
+        ) p1
+        group by product_id
+    ) d on p.product_id = d.pid and p.change_date = d.cd 
+    where pid is not null
+) p
