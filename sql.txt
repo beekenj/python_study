@@ -329,3 +329,11 @@ from (
     ) d on p.product_id = d.pid and p.change_date = d.cd 
     where pid is not null
 ) p
+
+
+620. Not Boring Movies
+# Write your MySQL query statement below
+SELECT *
+FROM Cinema
+WHERE id % 2 = 1 AND description != 'boring'
+ORDER BY rating DESC
