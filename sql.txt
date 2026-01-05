@@ -348,3 +348,15 @@ select
 from transactions
 group by transaction_date
 order by transaction_date asc
+
+
+1934. Confirmation Rate
+# Write your MySQL query statement below
+select c.user_id, round(sum(c.confirm)/count(*), 2) as confirmation_rate
+from (
+    select s.user_id, if(action = 'confirmed', 1, 0) as confirm
+    from Signups s
+    left join Confirmations c
+    on s.user_id = c.user_id
+) c
+group by c.user_id
