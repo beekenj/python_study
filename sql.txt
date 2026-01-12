@@ -360,3 +360,22 @@ from (
     on s.user_id = c.user_id
 ) c
 group by c.user_id
+
+
+3793. Find Users with High Token Usage
+# Write your MySQL query statement below
+select p.user_id, c.prompt_count, round(sum(p.tokens)/c.prompt_count, 2) as avg_tokens
+from prompts p
+left join
+(
+    select *, count(*) as prompt_count
+    from prompts
+    group by user_id
+) c
+on p.user_id = c.user_id
+where c.prompt_count >= 3
+group by p.user_id
+having max(p.tokens) > avg_tokens
+order by avg_tokens desc, p.user_id asc
+
+
