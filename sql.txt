@@ -472,3 +472,16 @@ from (
 group by s.category
 order by total_quantity desc, total_revenue desc, s.category asc
 limit 1)
+
+
+1731. The Number of Employees Which Report to Each Emplo
+# Write your MySQL query statement below
+select e.employee_id, e.name, o.reports_count, o.average_age
+from Employees e
+left join (
+    select reports_to, count(*) as reports_count, round(sum(age)/count(*)) as average_age 
+    from Employees
+    group by reports_to
+) o on e.employee_id = o.reports_to
+where e.employee_id in (select reports_to from Employees)
+order by e.employee_id ascyee
