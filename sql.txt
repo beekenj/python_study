@@ -485,3 +485,38 @@ left join (
 ) o on e.employee_id = o.reports_to
 where e.employee_id in (select reports_to from Employees)
 order by e.employee_id ascyee
+
+
+1179. Reformat Department Table
+# Write your MySQL query statement below
+select 
+    d.id, 
+    max(d.Jan_Revenue) as Jan_Revenue,
+    max(d.Feb_Revenue) as Feb_Revenue,
+    max(d.Mar_Revenue) as Mar_Revenue,
+    max(d.Apr_Revenue) as Apr_Revenue,
+    max(d.May_Revenue) as May_Revenue,
+    max(d.Jun_Revenue) as Jun_Revenue,
+    max(d.Jul_Revenue) as Jul_Revenue,
+    max(d.Aug_Revenue) as Aug_Revenue,
+    max(d.Sep_Revenue) as Sep_Revenue,
+    max(d.Oct_Revenue) as Oct_Revenue,
+    max(d.Nov_Revenue) as Nov_Revenue,
+    max(d.Dec_Revenue) as Dec_Revenue
+from
+(select 
+    id,
+    case when month = 'Jan' then revenue else null end as Jan_Revenue,
+    case when month = 'Feb' then revenue else null end as Feb_Revenue,
+    case when month = 'Mar' then revenue else null end as Mar_Revenue,
+    case when month = 'Apr' then revenue else null end as Apr_Revenue,
+    case when month = 'May' then revenue else null end as May_Revenue,
+    case when month = 'Jun' then revenue else null end as Jun_Revenue,
+    case when month = 'Jul' then revenue else null end as Jul_Revenue,
+    case when month = 'Aug' then revenue else null end as Aug_Revenue,
+    case when month = 'Sep' then revenue else null end as Sep_Revenue,
+    case when month = 'Oct' then revenue else null end as Oct_Revenue,
+    case when month = 'Nov' then revenue else null end as Nov_Revenue,
+    case when month = 'Dec' then revenue else null end as Dec_Revenue
+from Department) d
+group by d.id
