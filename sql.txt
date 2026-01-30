@@ -528,3 +528,13 @@ select activity_date as day, count(distinct user_id) as active_users
 from Activity
 where activity_date between date_sub("2019-07-27", interval 29 day) and "2019-07-27"
 group by activity_date
+
+
+1204. Last Person to Fit in the Bus
+# Write your MySQL query statement below
+select q.person_name 
+from (select *, sum(weight) over (order by turn) as total
+from Queue) q
+where q.total <= 1000
+order by q.turn desc
+limit 1
