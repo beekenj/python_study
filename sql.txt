@@ -538,3 +538,11 @@ from Queue) q
 where q.total <= 1000
 order by q.turn desc
 limit 1
+
+
+3436. Find Valid Emails
+# Write your MySQL query statement below
+select *
+from Users
+where regexp_like(email, '^[A-Za-z0-9_]+@[A-Za-z]+\\.com$')
+order by user_id asc
