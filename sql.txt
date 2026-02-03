@@ -546,3 +546,11 @@ select *
 from Users
 where regexp_like(email, '^[A-Za-z0-9_]+@[A-Za-z]+\\.com$')
 order by user_id asc
+
+
+3465. Find Products with Valid Serial Numbers
+# Write your MySQL query statement below
+select *
+from products
+where regexp_like(description, '(^| )+SN+[0-9]{4}+\\-+[0-9]{4}+( |$)', 'c')
+order by product_id asc
